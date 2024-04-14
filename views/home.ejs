@@ -1,0 +1,163 @@
+<%- include ('./partials/_header.ejs')  %> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookstore</title>
+</head>
+<style>
+    h1{font-weight: 100;text-align: center;font-size: 40px;font-family: "Times New Roman", Times, serif}.container{display: -webkit-box;display: -ms-flexbox;display: flex;-ms-flex-wrap: wrap;flex-wrap: wrap;-webkit-box-align: center;-ms-flex-align: center;align-items: center;-webkit-box-pack: justify;-ms-flex-pack: justify;justify-content: space-between;width: 60vw;margin: auto}.container h1{-webkit-box-flex: 0;-ms-flex: none;flex: none;width: 100%;margin: 0 2% 2em 2%}.cardList{position: relative;display: block;-webkit-box-flex: 1;-ms-flex: 1 1 auto;flex: 1 1 auto;margin: 2%;-webkit-filter: none;filter: none;opacity: 1;-webkit-transition: 0.25s ease-in-out opacity, 0.25s ease-in-out filter;transition: 0.25s ease-in-out opacity, 0.25s ease-in-out filter;cursor: pointer}.cardList__title{display: block;padding-top: 70%;text-align: center;font-size: 20px;font-weight: bold;opacity: 0.8;z-index: 0}.cardList:hover .card{box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.5);-webkit-transition: 0.35s ease-out transform, 0.35s ease-out shadow;transition: 0.35s ease-out transform, 0.35s ease-out shadow}.cardList:nth-child(2n+1) .card:nth-child(1){-webkit-transform: translate(2%, 2%);transform: translate(2%, 2%)}.cardList:nth-child(2n+1) .card:nth-child(2){-webkit-transform: translate(2%, -2%) rotate(-2deg);transform: translate(2%, -2%) rotate(-2deg)}.cardList:nth-child(2n+1) .card:nth-child(3){-webkit-transform: rotate(2deg);transform: rotate(2deg)}.cardList:nth-child(2n + 1):hover .card:nth-child(1){-webkit-transform: translate(30%, 45%) rotate(-2deg);transform: translate(30%, 45%) rotate(-2deg)}.cardList:nth-child(2n + 1):hover .card:nth-child(2){-webkit-transform: translate(-50%, 35%) rotate(5deg);transform: translate(-50%, 35%) rotate(5deg)}.cardList:nth-child(2n + 1):hover .card:last-of-type{-webkit-transform: rotate(5deg) translate(0%, -40%);transform: rotate(5deg) translate(0%, -40%)}.cardList:nth-child(2n) .card:nth-child(1){-webkit-transform: translate(2%, 2%);transform: translate(2%, 2%)}.cardList:nth-child(2n) .card:nth-child(2){-webkit-transform: translate(2%, -2%) rotate(-2deg);transform: translate(2%, -2%) rotate(-2deg)}.cardList:nth-child(2n) .card:nth-child(3){-webkit-transform: rotate(2deg);transform: rotate(2deg)}.cardList:nth-child(2n ):hover .card:nth-child(1){-webkit-transform: translate(30%, 45%) rotate(-2deg);transform: translate(30%, 45%) rotate(-2deg)}.cardList:nth-child(2n ):hover .card:nth-child(2){-webkit-transform: translate(-50%, 35%) rotate(5deg);transform: translate(-50%, 35%) rotate(5deg)}.cardList:nth-child(2n ):hover .card:last-of-type{-webkit-transform: rotate(5deg) translate(0%, -40%);transform: rotate(5deg) translate(0%, -40%)}.card{position: absolute;top: 0;left: 0;width: 100%;padding-top: 60%;background-color: #ccc;-webkit-transition: 0.28s ease-out transform, 0.28s ease-out shadow;transition: 0.28s ease-out transform, 0.28s ease-out shadow;overflow: hidden;z-index: 5;-webkit-backface-visibility: hidden;backface-visibility: hidden;box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2)}.card__bg{position: absolute;top: 0;left: 0;right: 0;bottom: 0;background-repeat: no-repeat;background-size: cover;background-color: #ccc}.cardList:hover .card:not(:last-of-type) .card__bg{background-blend-mode: normal;-webkit-filter: none;filter: none;opacity: 1}.container:hover .cardList{-webkit-filter: grayscale(100%);filter: grayscale(100%);opacity: 0.25;z-index: 1}.container:hover .cardList:hover{-webkit-filter: none;filter: none;opacity: 1;z-index: 100}
+</style>
+<style>
+
+    h1 {
+        color: #333;
+    }
+    ul {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    #li {
+        width: calc(33.33% - 20px);
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        margin: 10px;
+        padding: 20px;
+    }
+
+    li h2 {
+        margin-top: 0;
+        color: #333;
+    }
+
+
+</style>
+<body>
+    <div class="container">
+        <h1>Book Store</h1>
+        <div class="cardList">
+            <div class="card">
+                <div class="card__bg" style="background-image: url('https://i.imgur.com/SMizJIc.jpg')"></div>
+            </div>
+            <div class="card">
+                <div class="card__bg" style="background-image: url('https://i.imgur.com/USEOJiA.png')"></div>
+            </div>
+            <div class="card">
+                <div class="card__bg" style="background-image: url('https://i.imgur.com/xkLCppR.jpg')"></div>
+            </div><span class="cardList__title">Data Science</span>
+        </div>
+        <div class="cardList">
+            <div class="card">
+                <div class="card__bg" style="background-image: url('https://i.imgur.com/0XzgG12.png')"></div>
+            </div>
+            <div class="card">
+                <div class="card__bg" style="background-image: url('https://i.imgur.com/pX4lic5.png')"></div>
+            </div>
+            <div class="card">
+                <div class="card__bg" style="background-image: url('https://i.imgur.com/wKVvrC8.jpg')"></div>
+            </div><span class="cardList__title">Development</span>
+        </div>
+        <div class="cardList">
+            <div class="card">
+                <div class="card__bg" style="background-image: url('https://i.imgur.com/wKVvrC8.jpg')"></div>
+            </div>
+            <div class="card">
+                <div class="card__bg" style="background-image: url('https://i.imgur.com/SMizJIc.jpg')"></div>
+            </div>
+            <div class="card">
+                <div class="card__bg" style="background-image: url('https://i.imgur.com/SMizJIc.jpg')"></div>
+            </div><span class="cardList__title">Stories</span>
+        </div>
+        <div class="cardList">
+            <div class="card">
+                <div class="card__bg" style="background-image: url('https://i.imgur.com/xkLCppR.jpg')"></div>
+            </div>
+            <div class="card">
+                <div class="card__bg" style="background-image: url('https://i.imgur.com/SMizJIc.jpg')"></div>
+            </div>
+            <div class="card">
+                <div class="card__bg" style="background-image: url('https://i.imgur.com/SMizJIc.jpg')"></div>
+            </div><span class="cardList__title">History</span>
+        </div>
+    </div>
+    <hr>
+    <hr>
+
+        <ul>
+            <% books.forEach(function(book) { %>
+                <li id="li" class="" >
+                    <img src="<%= book.image %>" alt="<%= book.title %>" width="200px"><br>
+                    <h2><%= book.title %></h2>
+                    <div>
+                    <p  style="width:400px;">Description: <%= book.description %></p>
+                    <p>Price: $<%= book.price %></p>
+                    <button class="btn btn-white" onclick="window.location.href='/books/<%= book._id %>'">View Detail</button>
+                    <button class="btn btn-white" onclick="addToOrder('<%= book._id %>')">Add Order</button>
+                    <button class="btn btn-white" onclick="addToWishlist('<%= book._id %>')">Add Wishlist</button>
+                    
+                    </div>
+
+                </li>
+            <% }); %>
+            
+        </ul>
+
+
+
+
+
+    </pre>
+    <script>        
+        function addToOrder(bookId) {
+            console.log('Book ID:', bookId); // Log the bookId parameter
+            fetch(`/orders/add?bookId=${bookId}`, { // Include bookId as a query parameter
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ bookId }) // You can remove this line if bookId is included in the query string
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to add item to wishlist');
+                }
+                // Handle success response
+                console.log('Item added to wishlist successfully');
+            })
+            .catch(error => {
+                // Handle error
+                console.error('Error adding item to wishlist:', error);
+            });
+        }
+        
+        //_______________________________________
+        function addToWishlist(bookId) {
+            console.log('Book ID:', bookId); // Log the bookId parameter
+            fetch(`/wishlist/add?bookId=${bookId}`, { // Include bookId as a query parameter
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ bookId }) // You can remove this line if bookId is included in the query string
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to add item to wishlist');
+                }
+                // Handle success response
+                console.log('Item added to wishlist successfully');
+            })
+            .catch(error => {
+                // Handle error
+                console.error('Error adding item to wishlist:', error);
+            });
+        }
+        
+    </script>
+</body>
+</html>
+<%- include ('./partials/_footer.ejs') %> 

@@ -1,0 +1,416 @@
+<!-- new-book.ejs -->
+<%- include ('./partials/_header.ejs')  %> 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Book</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        #li {
+            width: calc(33.33% - 20px);
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 20px;
+            position: relative;
+        }
+
+        li h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        li p {
+            margin-bottom: 0;
+            color: #666;
+        }
+
+        .btn-container {
+            position: absolute;
+            bottom: 10px;
+            left: 20px;
+        }
+
+        /*.btn {
+            margin-right: 10px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }*/
+
+        .btn.edit {
+            background-color: #ffc107;
+        }
+
+        .btn.delete {
+            background-color: #dc3545;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        .btn {
+            padding: 6px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .btn-edit {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .btn-delete {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="row">
+          <div class="sidebar col-2" style="width: 300px;">
+        <ul class="list-group" >
+            <li class="list-group-item"><a class="btn" onclick="showorders()">Order</a></li>
+            <li class="list-group-item"><a class="btn" onclick="showwishlist()">Wishlist</a></li>
+            <li class="list-group-item"><a class="btn"onclick="showuserlist()">User List</a></li>
+            <li class="list-group-item"><a class="btn" onclick="showFormbook()">Create Book</a></li>
+            <li class="list-group-item"><a class="btn" onclick="showFormcategory()">Create Category</a></li>
+            <li class="list-group-item"><a class="btn"onclick="showTable()">show Books</a></li>
+            <li class="list-group-item"><a class="btn" onclick="showcategory()">show Category</a></li>
+        </ul>
+        <div>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+    <!-- <h1>Add New Book</h1> -->
+    <div class="col-8" id="data">
+        <ul id="cards">
+            <% books.forEach(function(book) { %>
+                <li id="li">
+                    <!-- Specify the src attribute to point to the image path stored in the database -->
+                    <img src="<%= book.image %>" alt="image" width="80px">
+                    <h2><%= book.title %></h2>
+                    <p>by <%= book.author %></p>
+                    <p>Description: <%= book.description %></p>
+                    <p>Price: $<%= book.price %></p>
+                    <div class="btn-container">
+                        <button class="btn edit" onclick="editBook('<%= book._id %>')">Edit</button>
+                        <button class="btn delete" onclick="deleteBook('<%= book._id %>')">Delete</button>
+                    </div>
+                </li>
+            <% }); %>
+        
+        </ul>
+    </div>
+ 
+    </div>
+ 
+    <hr>
+    <!-- <h1 class="contianer text-center">Show Table Or Cards</h1>
+    <div class="container d-flex justify-content-center">
+            <button class="btn btn-warning" onclick="showTable()">Table View</button>
+    <button  class="btn btn-warning "onclick="showCards()">Card View</button>
+    </div> -->
+
+<div >
+<!--  
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="data">
+           
+        </tbody>
+    </table> -->
+</div>
+
+
+
+    <script>
+        function showorders(){
+            document.getElementById('data').innerHTML=`
+            <table>
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Book Title</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% Orders.forEach(order => { %>
+                        <tr>
+                            <td><%= order.user.username %></td>
+                            <td><%= order.book.title %></td>
+                            <td><%= order.book.price %></td>
+                            <td class='btn btn-success m-2'>Accept</td>
+                            <td class='btn btn-danger'>Reject</td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+
+`
+        }
+        function showwishlist(){
+            document.getElementById('data').innerHTML=`
+            <table>
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Book Title</th>
+                        <th>Price</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <% wishlist.forEach(item => { %>
+                        <tr>
+                            <td><%= item.user.username %></td>
+                            <td><%= item.book.title %></td>
+                            <td><%= item.book.price %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+`
+        }
+        function showuserlist(){
+            document.getElementById('data').innerHTML=
+
+            `<body>
+                <div class="container">
+                    <h1>Users</h1>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% users.forEach(function(user) { %>
+                                <tr>
+                                    <td><%= user.username %></td>
+                                    <td><%= user.email %></td>
+                                    <td>
+                                        <a href="/users/<%= user._id %>/edit" class="btn btn-primary">Edit</a>
+                                        <form action="/users/<%= user._id %>" method="POST" style="display: inline;">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            </body>
+            `
+        }
+        function showcategory(){
+            document.getElementById('data').innerHTML=`
+            <h1>Categories</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% categories.forEach(function(category) { %>
+                        <tr>
+                            <td><%= category.name %></td>
+                            <td>
+                                <a href="/categories/<%= category._id %>/edit" class="btn btn-primary">Edit</a>
+                            </td>
+                            <td>
+                                <form action="/categories/<%= category._id %>" method="POST" style="display: inline;">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+
+            `
+
+        }
+        function showFormbook(){
+            document.getElementById('data').innerHTML=`
+            <form action="/home" class="container mt-5" method="POST" enctype="multipart/form-data">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required><br><br>
+                
+                <label for="image">Image URL:</label>
+                <input type="file" id="image" name="image" required><br><br>
+                
+                <label for="description">Description:</label><br>
+                <textarea id="description" name="description" rows="4" required></textarea><br><br>
+                
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price" required><br><br>
+            
+                <!-- Input field to select existing category -->
+                <label for="category">Select Category:</label>
+                <select id="category" name="category" required>
+                    <% categories.forEach(function(category) { %>
+                        <option value="<%= category._id %>"><%= category.name %></option>
+                    <% }); %>
+                </select>
+                <br><br>
+                <!-- Input field to create a new category -->
+                <button type="submit">Add Book</button>
+            </form>
+            `
+        }
+
+        function showFormcategory(){
+            document.getElementById('data').innerHTML=`
+            <form class="container"  action="/category" method="post">
+                <label for="newCategory">New Category:</label>
+                <input type="text" id="newCategory" name="newCategory"><br><br>
+                <button type="submit">Add Category</button>
+            </form> 
+`
+        }
+        
+        function showCards(){
+            document.getElementById('cards').innerHTML=`
+             <% books.forEach(function(book) { %>
+                <li id="li">
+                    <!-- Specify the src attribute to point to the image path stored in the database -->
+                    <img src="<%= book.image %>" alt="image" width="80px">
+                    <h2><%= book.title %></h2>
+                    <p>by <%= book.author %></p>
+                    <p>Description: <%= book.description %></p>
+                    <p>Price: $<%= book.price %></p>
+                    <div class="btn-container">
+                        <button class="btn edit" onclick="editBook('<%= book._id %>')">Edit</button>
+                        <button class="btn delete" onclick="deleteBook('<%= book._id %>')">Delete</button>
+                    </div>
+                </li>
+            <% }); %>`
+            document.getElementById('data').innerHTML=` `
+
+
+        }
+        
+        
+        function showTable(){
+            document.getElementById('data').innerHTML=`
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody >
+                   <% books.forEach(function(book) { %>
+                <tr>
+                    <td><%= book.title %></td>
+                    <td><%= book.author %></td>
+                    <td><%= book.description %></td>
+                    <td>$<%= book.price.toFixed(2) %></td>
+                    <td>
+                        <button class="btn btn-edit" onclick="editBook('<%= book._id %>')">Edit</button>
+                    </td><td>
+                        <button class="btn btn-delete" onclick="deleteBook('<%= book._id %>')">Delete</button>
+                    </td>
+                </tr>
+            <% }); %>
+                </tbody>
+            </table>
+            
+            `
+            document.getElementById('cards').innerHTML=` ` 
+        }
+        
+        
+        async function editBook(id) {
+            // Implement AJAX request to the edit route
+            // Example using fetch API:
+            const response = await fetch(`/books/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ title: 'New Title', author: 'New Author', description: 'New Description', price: 19.99 })
+            });
+            const data = await response.json();
+            console.log(data);
+            // Handle response as needed
+        }
+    
+        async function deleteBook(id) {
+            // Implement AJAX request to the delete route
+            // Example using fetch API:
+            const response = await fetch(`/books/${id}`, {
+                method: 'DELETE'
+            });
+            const data = await response.json();
+            console.log(data);
+            // Handle response as needed
+        }
+    </script>
+</body>
+</html>
+
+<%- include ('./partials/_footer.ejs') %> 
