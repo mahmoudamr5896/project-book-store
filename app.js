@@ -6,16 +6,14 @@ const Routeruser = require('./Router/user')
 // app.set('views', __dirname + '/views');
 const mongoose = require('mongoose');
 //2) connect
-mongoose.connect('mongodb://localhost:27017/bookstore', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
+mongoose.connect('mongodb://localhost:27017/bookstore')
   .then(() => {
     console.log('Connected to MongoDB');
   })
   .catch((error) => {
     console.error('Error connecting to MongoDB:', error);
   });
+
 //4)
 
 
