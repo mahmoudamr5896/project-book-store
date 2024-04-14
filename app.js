@@ -1,7 +1,7 @@
 //app.js
 const express = require('express')
-const book = require('../project book store/Router/books')
-const Routeruser = require('../project book store/Router/user')
+const book = require('./Router/books')
+const Routeruser = require('./Router/user')
 // app.set('view engine', 'ejs');
 // app.set('views', __dirname + '/views');
 const mongoose = require('mongoose');
