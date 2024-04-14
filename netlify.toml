@@ -3,7 +3,7 @@
   publish = "frontend/build"
 
 [[redirects]]
-  from = "/api/*"
+  from = "/*"
   to = "http://localhost:3001/:splat"
   status = 200
   force = true
